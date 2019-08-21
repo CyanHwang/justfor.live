@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     content: DataTypes.TEXT
   }, {});
   Article.associate = function(models) {
-    // associations can be defined here
+    models.Article.belongsTo(models.Catalogue)
   };
   return Article;
 };
