@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+var history = require('connect-history-api-fallback');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -7,7 +8,9 @@ var logger = require('morgan');
 // 跨域
 var cors = require('cors');
 
+// history 404问题
 var app = express();
+app.use(history());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
