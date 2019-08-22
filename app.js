@@ -8,9 +8,8 @@ var logger = require('morgan');
 // 跨域
 var cors = require('cors');
 
-// history 404问题
 var app = express();
-app.use(history());
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,6 +37,9 @@ app.use('/admin/api/admins',adminsRouter);
 app.use('/admin/api/tips',tipsRouter);
 app.use('/admin/api/catalogues',cataloguesRouter);
 app.use('/admin/api/articles',articlesRouter);
+
+// history 404问题
+app.use(history());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
