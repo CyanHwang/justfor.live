@@ -1,7 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
-var history = require('connect-history-api-fallback');
 var path = require('path');
+var history = require('connect-history-api-fallback');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
@@ -29,17 +29,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // 前后台静态页面托管
-app.use('/admin',express.static(path.join(__dirname, './admin')));
-app.use('/',express.static(path.join(__dirname, './web')));
+app.use('/admin',express.static('admin'));
+app.use('/',express.static('web'));
+app.use(history({ verbose: true, index: '/'}));
 
 // 接口
 app.use('/admin/api/admins',adminsRouter);
 app.use('/admin/api/tips',tipsRouter);
 app.use('/admin/api/catalogues',cataloguesRouter);
 app.use('/admin/api/articles',articlesRouter);
-
-// history 404问题
-app.use(history());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
