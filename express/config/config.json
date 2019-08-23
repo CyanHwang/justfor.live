@@ -1,24 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "Yang1994",
+    "password": "root",
     "database": "Just",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "timezone": "+08:00"
-  },
-  "test": {
-    "username": "root",
-    "password": "Yang1994",
-    "database": "Just_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "timezone": "+08:00"
-  },
-  "production": {
-    "username": "root",
-    "password": "Yang1994",
-    "database": "Just_production",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "timezone": "+08:00"

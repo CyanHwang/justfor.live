@@ -1,7 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var history = require('connect-history-api-fallback');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
@@ -9,7 +8,6 @@ var logger = require('morgan');
 var cors = require('cors');
 
 var app = express();
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,10 +27,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // 接口
-app.use('/admin/api/admins',adminsRouter);
-app.use('/admin/api/tips',tipsRouter);
-app.use('/admin/api/catalogues',cataloguesRouter);
-app.use('/admin/api/articles',articlesRouter);
+app.use('/admins',adminsRouter);
+app.use('/tips',tipsRouter);
+app.use('/catalogues',cataloguesRouter);
+app.use('/articles',articlesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
