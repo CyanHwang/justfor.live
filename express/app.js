@@ -28,11 +28,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// 前后台静态页面托管
-app.use('/admin',express.static(path.join(__dirname, './admin')));
-app.use('/',express.static(path.join(__dirname, './web')));
-app.use(history({ verbose: true, index: '/'}));
-
 // 接口
 app.use('/admin/api/admins',adminsRouter);
 app.use('/admin/api/tips',tipsRouter);
