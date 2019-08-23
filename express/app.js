@@ -29,8 +29,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // 前后台静态页面托管
-app.use('/admin',express.static('admin'));
-app.use('/',express.static('web'));
+app.use('/admin',express.static(path.join(__dirname, './admin')));
+app.use('/',express.static(path.join(__dirname, './web')));
 app.use(history({ verbose: true, index: '/'}));
 
 // 接口
