@@ -6,23 +6,21 @@ const sequelize = require('sequelize');
 const Op = sequelize.Op;
 
 router.get('/', async (req, res) => {
-    //  分页参数
-    var currentPage = req.param('currentPage') == undefined ? 1 : req.param('currentPage'); // 判断当前是第几页，如果是undefined就是第一页
-    var pageSize = req.param('pageSize') == undefined ? 10 : req.param('pageSize'); // 每页只显示1条
-    var data = {}; // 定义一个空的data，等下读数据
+    var currentPage = req.param('currentPage') == undefined ? 1 : req.param('currentPage');
+    var pageSize = req.param('pageSize') == undefined ? 10 : req.param('pageSize');
+    var data = {};
 
-    // 定义一个参数，按照商品名称模糊搜索
     var keyword = req.query.keyword;
     if (keyword != undefined && keyword != '') {
         data.title = {
-            [Op.like]: '%' + keyword + '%' // 模糊搜索组成前后%中间是定义的接收数据用+连接
+            [Op.like]: '%' + keyword + '%'
         }
     }
-    //按分类搜索
+
     var TipId = req.query.TipId;
     if (TipId != undefined && TipId != '') {
         data.TipId = {
-            [Op.eq]: TipId, // 比较精确的搜索
+            [Op.eq]: TipId,
         }
     }
     let result = await models.Catalogue.findAndCountAll({
