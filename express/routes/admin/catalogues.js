@@ -5,14 +5,6 @@ var models = require('../../models');
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
 
-router.post('/', async (req, res) => {
-    await models.Catalogue.create(req.body).then(result => {
-        res.json({
-            catalogues: result
-        })
-    })
-})
-
 router.get('/', async (req, res) => {
     //  分页参数
     var currentPage = req.param('currentPage') == undefined ? 1 : req.param('currentPage'); // 判断当前是第几页，如果是undefined就是第一页
@@ -33,7 +25,7 @@ router.get('/', async (req, res) => {
             [Op.eq]: TipId, // 比较精确的搜索
         }
     }
-    await models.Catalogue.findAndCountAll({
+    let result = await models.Catalogue.findAndCountAll({
         include: [models.Tip],
         where: data,
         offset: (currentPage - 1) * pageSize,
@@ -41,24 +33,48 @@ router.get('/', async (req, res) => {
         order: [
             ['id', 'ASC']
         ]
-    }).then(result => {
-        res.json({
-            catalogues: result.rows,
-            pagination: {
-                currentPage: parseInt(currentPage),
-                pageSize: parseInt(pageSize),
-                total: result.count,
-            }
-        })
+    })
+    res.json({
+        catalogues: result.rows,
+        pagination: {
+            currentPage: parseInt(currentPage),
+            pageSize: parseInt(pageSize),
+            total: result.count,
+        },
+        status: '查询成功'
+    })
+});
+
+router.get('/:id', async (req, res) => {
+    let result = await models.Catalogue.findByPk(req.params.id)
+    res.json({
+        catalogue: result,
+        status: '查询成功'
     })
 })
 
-router.put(`/`, async (req, res) => {
-    await models.Catalogue.findByPk(req.body.id).then(result => {
-        result.update(req.body)
-        res.json({
-            catalogues: result
-        })
+router.post('/', async (req, res) => {
+    let result = await models.Catalogue.create(req.body)
+    res.json({
+        catalogues: result,
+        status: '新增成功'
+    })
+})
+
+router.put(`/:id`, async (req, res) => {
+    let result = await models.Catalogue.findByPk(req.body.id)
+    result.update(req.body)
+    res.json({
+        catalogue: result,
+        status: '编辑成功'
+    })
+})
+
+router.delete(`/:id`, async (req, res) => {
+    let result = await models.Catalogue.findByPk(req.body.id)
+    result.destroy();
+    res.json({
+        status: '删除成功'
     })
 })
 

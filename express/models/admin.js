@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Admin = sequelize.define('Admin', {
     username: DataTypes.STRING,
-    sex: DataTypes.INTEGER,
+    // sex: DataTypes.INTEGER,
     password: DataTypes.STRING
   }, {});
   Admin.associate = function(models) {
