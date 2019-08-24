@@ -24,12 +24,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-// 接口
-app.use('/admins',adminsRouter);
-app.use('/tips',tipsRouter);
-app.use('/catalogues',cataloguesRouter);
-app.use('/articles',articlesRouter);
 //后台登录接口认证
 app.use(jwt({'secret': process.env.SECRET}).unless({
   path: [
@@ -37,6 +31,12 @@ app.use(jwt({'secret': process.env.SECRET}).unless({
       '/admins/sign-up'
   ]
 }));
+// 接口
+app.use('/admins',adminsRouter);
+app.use('/tips',tipsRouter);
+app.use('/catalogues',cataloguesRouter);
+app.use('/articles',articlesRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
