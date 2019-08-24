@@ -17,11 +17,12 @@ var articlesRouter = require('./routes/admin/articles');
 
 var app = express();
 
+// 跨域
+app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-// 跨域
-app.use(cors());
+
 
 app.use(logger('dev'));
 app.use(express.json());
