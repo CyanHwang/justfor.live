@@ -14,7 +14,12 @@ router.get('/', async (req, res) => {
 
 
 router.get('/:id', async (req, res) => {
-    let result = await models.Article.findByPk(req.params.id)
+    let result = await models.Article.findByPk(req.params.id, {
+        include: [models.Catalogue],
+        where: {
+            CatalogueId: req.params.id
+        }
+    })
     res.json({
         article: result,
         status: '查询成功'

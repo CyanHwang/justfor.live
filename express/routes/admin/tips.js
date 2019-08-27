@@ -15,7 +15,10 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
-    let result = await models.Tip.findByPk(req.params.id)
+    let result = await models.Tip.findByPk(req.params.id, {
+        include: [models.Catalogue],
+        where: {TipId:req.params.id},
+    })
     res.json({
         tip: result,
         status: '查询成功'

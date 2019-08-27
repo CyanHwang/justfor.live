@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     content: DataTypes.TEXT
   }, {});
   Tip.associate = function(models) {
-    // associations can be defined here
+    models.Tip.hasMany(models.Catalogue)
   };
   return Tip;
 };
