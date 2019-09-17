@@ -16,7 +16,11 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     let result = await models.Tip.findByPk(req.params.id, {
-        include: [models.Catalogue],
+        include: [
+            {model: models.Catalogue,
+            as:'catalogues'
+            }
+          ],
         where: {TipId:req.params.id},
     })
     res.json({

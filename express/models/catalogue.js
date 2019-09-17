@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     content: DataTypes.TEXT
   }, {});
   Catalogue.associate = function(models) {
-    models.Catalogue.belongsTo(models.Tip)
+    models.Catalogue.belongsTo(models.Tip,{as:'tip'})
   };
   return Catalogue;
 };

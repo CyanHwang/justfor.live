@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
         }
     }
     let result = await models.Catalogue.findAndCountAll({
-        include: [models.Tip],
+        include: [{model:models.Tip,as:'tip'}],
         where: data,
         offset: (currentPage - 1) * pageSize,
         limit: parseInt(pageSize),
